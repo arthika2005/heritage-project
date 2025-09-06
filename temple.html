@@ -1,11 +1,89 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html>
 <head>
-  <title>Kumbakonam Temples</title>
+    <title>Kumbakonam Temples</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        #search-section {
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            padding: 8px;
+            width: 250px;
+        }
+        button {
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+        img {
+            max-width: 400px;
+            display: block;
+            margin-top: 10px;
+        }
+        p {
+            margin: 5px 0;
+        }
+    </style>
 </head>
 <body>
-  <h1>Kumbakonam Temples</h1>
-  <p>Search temples info will be here.</p>
-  <a href="/index">Back to Home</a>
+
+<h1>Kumbakonam Temples Search</h1>
+
+<div id="search-section">
+    <input type="text" id="search" placeholder="Enter temple name">
+    <button onclick="searchTemple()">Search</button>
+</div>
+
+<div id="result">
+    <img id="image" src="" alt="Temple Image">
+    <p id="story"></p>
+    <p id="timings"></p>
+    <p id="famous"></p>
+</div>
+
+<script>
+ const temples = {
+        "sarangapani": {
+            image: "sarangapani.jpg",
+            story: "Sarangapani Temple is an ancient Vishnu temple located in Kumbakonam.",
+            timings: "6:00 AM - 9:00 PM",
+            famous: "One of the Divya Desams, famous for its architecture."
+        },
+        "kumbeswarar": {
+            image: "kumbeswarar.jpg",
+            story: "Kumbeswarar Temple is a famous Shiva temple in Kumbakonam.",
+            timings: "5:30 AM - 8:30 PM",
+            famous: "Built by the Cholas, known for its huge gopuram."
+        },
+        "adikrishna": {
+            image: "adikrishna.jpg",
+            story: "Adi Kumbeswarar Temple is another famous temple in Kumbakonam.",
+            timings: "6:00 AM - 8:00 PM",
+            famous: "Famous for festivals and historic carvings."
+        }
+        // Add more temples as needed
+    };
+
+    function searchTemple() {
+        const query = document.getElementById("search").value.toLowerCase();
+        const result = temples[query];
+        if(result){
+            document.getElementById("image").src = result.image;
+            document.getElementById("story").innerText = result.story;
+            document.getElementById("timings").innerText = "Timings: " + result.timings;
+            document.getElementById("famous").innerText = "Why Famous: " + result.famous;
+        } else {
+            alert("Temple not found. Check spelling!");
+            document.getElementById("image").src = "";
+            document.getElementById("story").innerText = "";
+            document.getElementById("timings").innerText = "";
+            document.getElementById("famous").innerText = "";
+        }
+    }
+</script>
+
 </body>
-</html>Use Control + Shift + m to toggle the tab key moving focus. Alternatively, use esc then tab to move to the next interactive element on the page.
+</html>
