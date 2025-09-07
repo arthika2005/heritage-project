@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kumbakonam Temples</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        input[type="text"] { width: 300px; padding: 5px; }
+        .temple { margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>Kumbakonam Temples</h1>
+    <input type="text" id="searchBar" placeholder="Search for a temple...">
+    <div id="templeResults"></div>
+
+    <script>
+        const temples = [
+            {name: "Sarangapani Temple", info: "Open: 6 AM - 9 PM", image: "sarangapani.jpg"},
+            {name: "Adi Kumbeswarar Temple", info: "Open: 5:30 AM - 9 PM", image: "adi_kumbeswarar.jpg"},
+            {name: "Nageswaran Temple", info: "Open: 6 AM - 8 PM", image: "suriya.jpg"}
+        ];
+
+        const searchBar = document.getElementById('searchBar');
+        const resultsDiv = document.getElementById('templeResults');
+
+        searchBar.addEventListener('input', () => {
+            const query = searchBar.value.toLowerCase();
+            resultsDiv.innerHTML = ''; // clear previous results
+
+            const filtered = temples.filter(t => t.name.toLowerCase().includes(query));
+            filtered.forEach(t => {
+                const div = document.createElement('div');
+                div.className = 'temple';
+                div.innerHTML = <h3>${t.name}</h3><p>${t.info}</p><img src="${t.image}" width="200">;
+                resultsDiv.appendChild(div);
+            });
+        });
+    </script>
+</body>
+</html>
