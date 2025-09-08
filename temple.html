@@ -36,25 +36,42 @@ const templeData = {
   }
   // Add more temples here
 };
-
+const templeKeywords = {
+  "sarangapani": ["sarangapani", "sarangapani temple", "sarangapani kovil"],
+  "airavatesvara": ["airavatesvara", "airavatesvara temple", "airavatesvara kovil"]
+};
 function searchTemple() {
   const query = document.getElementById('search').value.toLowerCase().trim();
   const detailsDiv = document.getElementById('templeDetails');
-  
-  if (templeData[query]) {
-    const t = templeData[query];
-detailsDiv.innerHTML = `
-      <h2>${query.toUpperCase()}</h2>
+  let found = false;
+
+  for (const temple in templeKeywords) {
+    if (templeKeywords[temple].some(word => query.includes(word))) {
+      const t = templeData[temple];
+      detailsDiv.innerHTML = `
+        <h2>${temple.toUpperCase()}</h2>
+        <p><strong>Story:</strong> ${t.story}</p>
+        <p><strong>Open:</strong> ${t.open} | <strong>Close:</strong> ${t.close}</p>
+        <p><strong>Why Famous:</strong> ${t.famous}</p>
+        <img src="${t.image}" alt="${temple}">
+      `;
+      found = true;
+      break;
+    }
+  }
+
+  if (!found) {
+    // If user types anything else, show default temple info (first temple)
+    const t = templeData["sarangapani"];
+    detailsDiv.innerHTML = `
+      <h2>${"SARANGAPANI"}</h2>
       <p><strong>Story:</strong> ${t.story}</p>
       <p><strong>Open:</strong> ${t.open} | <strong>Close:</strong> ${t.close}</p>
       <p><strong>Why Famous:</strong> ${t.famous}</p>
-      <img src="${t.image}" alt="${query}">
-    `;
-  } else {
-    detailsDiv.innerHTML = <p>Temple not found! Please try again.</p>;
-  }
+      <img src="${t.image}" alt="Sarangapani">
+    `;
+  }
 }
 </script>
-
 </body>
 </html>
