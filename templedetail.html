@@ -1,38 +1,70 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Temple Details</title>
-<style>
-  body { display:flex; flex-direction:column; align-items:center; justify-content:center; font-family:Arial; margin:20px; background:#f0f0f0; }
-  .card { background:white; padding:20px; margin:10px; border-radius:10px; box-shadow:0 4px 8px rgba(0,0,0,0.2); width:90%; max-width:500px; }
-  h2 { margin-top:0; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Temple Details</title>
+  <style>
+    body { font-family: Arial; text-align: center; background-color: beige; }
+    img { width: 400px; margin-top: 20px; }
+  </style>
 </head>
 <body>
 
-<div class="card">
-  <h2 id="templeName"></h2>
-  <p><strong>Story:</strong> <span id="story"></span></p>
-  <p><strong>Why Famous:</strong> <span id="why"></span></p>
-  <p><strong>Opening Time:</strong> <span id="open"></span></p>
-  <p><strong>Closing Time:</strong> <span id="close"></span></p>
-  <p><strong>Closing Time:</strong> <span id="close"></span></p>
-</div>
+<h1>Kumbakonam Temple Details</h1>
+<div id="templeDetails"></div>
 
 <script>
-  // Get data from query string
-  const params = new URLSearchParams(window.location.search);
-  const templeName = params.get("name");
-  const data = JSON.parse(decodeURIComponent(params.get("data")));
+const templeData = {
+  "sarangapani": {
+    story: "Sarangapani Temple story...",
+    open: "6:00 AM",
+    close: "12:00 PM",
+    famous: "Dedicated to Lord Vishnu, one of the 108 Divya Desams.",
+    image: "suriya.jpg"
+  },
+  "airavatesvara": {
+    story: "Airavatesvara Temple story...",
+    open: "7:00 AM",
+    close: "12:30 PM",
+    famous: "Known for its Chola architecture and sculptures.",
+    image: "suriya.jpg"
+  }
+};
 
-  document.getElementById("templeName").textContent = templeName;
-  document.getElementById("story").textContent = data.story;
-  document.getElementById("why").textContent = data.why;
-  document.getElementById("open").textContent = data.open;
-  document.getElementById("close").textContent = data.close;
-  document.getElementById("close").textContent = data.close;
+// Get query param
+const urlParams = new URLSearchParams(window.location.search);
+const query = urlParams.get("name")?.toLowerCase() || "";
+
+const detailsDiv = document.getElementById("templeDetails");
+let templeFound = null;
+
+// Match temple
+for (const key in templeData) {
+  if (query.includes(key)) {
+    templeFound = templeData[key];
+    detailsDiv.innerHTML = `
+      <h2>${key.toUpperCase()}</h2>
+<p><strong>Story:</strong> ${templeFound.story}</p>
+      <p><strong>Open:</strong> ${templeFound.open} | <strong>Close:</strong> ${templeFound.close}</p>
+      <p><strong>Why Famous:</strong> ${templeFound.famous}</p>
+      <img src="${templeFound.image}" alt="${key}">
+    `;
+    break;
+  }
+}
+
+// Default temple if not matched
+if (!templeFound) {
+  const t = templeData["sarangapani"];
+  detailsDiv.innerHTML = `
+    <h2>SARANGAPANI</h2>
+    <p><strong>Story:</strong> ${t.story}</p>
+    <p><strong>Open:</strong> ${t.open} | <strong>Close:</strong> ${t.close}</p>
+    <p><strong>Why Famous:</strong> ${t.famous}</p>
+    <img src="${t.image}" alt="Sarangapani">
+  `;
+}
 </script>
 
 </body>
