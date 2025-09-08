@@ -18,14 +18,68 @@
 <h1>Search Kumbakonam Temples</h1>
 <input type="text" id="search" placeholder="Enter temple name">
 <button onclick="gotoTemple()">Enter</button>
-
+<div id="templeDetails"></div>
 
 <script>
+  // Temple database
+const templeData = {
+  "sarangapani": {
+    story: "Sarangapani Temple story...",
+    open: "6:00 AM",
+    close: "12:00 PM",
+    famous: "Dedicated to Lord Vishnu, one of the 108 Divya Desams.",
+    image: "suriya.jpg"
+  },
+  "airavatesvara": {
+    story: "Airavatesvara Temple story...",
+    open: "7:00 AM",
+    close: "12:30 PM",
+    famous: "Known for its Chola architecture and sculptures.",
+    image: "suriya.jpg"
+  }
+};
 
-function gotoTemple() {
-  const query = document.getElementById('search').value.toLowerCase().trim();
-  window.location.href="templedetail.html?name="+encodeURIComponent(query);
+// Function to calculate similarity
+function similarity(a, b) {
+  a = a.toLowerCase();
+  b = b.toLowerCase();
+  let matches = 0;
+  for (let i = 0; i < Math.min(a.length, b.length); i++) {
+    if (a[i] === b[i]) matches++;
+  }
+  return matches / Math.max(a.length, b.length);
 }
+
+function searchTemple() {
+  const query = document.getElementById("search").value.toLowerCase().trim();
+  const detailsDiv = document.getElementById("templeDetails");
+
+  let bestMatch = null;
+  let bestScore = 0;
+
+  for (const temple in templeData) {
+    const score = similarity(query, temple);
+    if (score > bestScore) {
+      bestScore = score;
+      bestMatch = temple;
+    }
+  }
+
+ // If best score is decent (like > 0.3), show that temple
+  if (bestMatch && bestScore > 0.3) {
+    const t = templeData[bestMatch];
+    detailsDiv.innerHTML = `
+      <h2>${bestMatch.toUpperCase()}</h2>
+      <p><strong>Story:</strong> ${t.story}</p>
+      <p><strong>Open:</strong> ${t.open} | <strong>Close:</strong> ${t.close}</p>
+      <p><strong>Why Famous:</strong> ${t.famous}</p>
+      <img src="${t.image}" alt="${bestMatch}">
+    `;
+  } else {
+    detailsDiv.innerHTML = <p>No matching temple found.</p>;
+  }
+}
+
 </script>
 </body>
 </html>
