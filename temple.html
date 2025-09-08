@@ -17,63 +17,14 @@
 
 <h1>Search Kumbakonam Temples</h1>
 <input type="text" id="search" placeholder="Enter temple name">
-<button onclick="searchTemple()">Enter</button>
+<button onclick="gotoTemple()">Enter</button>
 
-<div id="templeDetails"></div>
 
 <script>
-const templeData = {
-  "sarangapani": {
-    story: "Sarangapani Temple story...",
-    open: "6:00 AM",
-    close: "12:00 PM",
-    famous: "Dedicated to Lord Vishnu, one of the 108 Divya Desams.",
-    image: "suriya.jpg"
-  },
-  "airavatesvara": {
-    story: "Airavatesvara Temple story...",
-    open: "7:00 AM",
-    close: "12:30 PM",
-    famous: "Known for its Chola architecture and sculptures.",
-    image: "suriya.jpg"
-  }
-  // Add more temples here
-};
-const templeKeywords = {
-  "sarangapani": ["sarangapani", "sarangapani temple", "sarangapani kovil"],
-  "airavatesvara": ["airavatesvara", "airavatesvara temple", "airavatesvara kovil"]
-};
-function searchTemple() {
+
+function gotoTemple() {
   const query = document.getElementById('search').value.toLowerCase().trim();
-  const detailsDiv = document.getElementById('templeDetails');
-  let found = false;
-
-  for (const temple in templeKeywords) {
-    if (templeKeywords[temple].some(word => query.includes(word))) {
-      const t = templeData[temple];
-      detailsDiv.innerHTML = `
-        <h2>${temple.toUpperCase()}</h2>
-        <p><strong>Story:</strong> ${t.story}</p>
-        <p><strong>Open:</strong> ${t.open} | <strong>Close:</strong> ${t.close}</p>
-        <p><strong>Why Famous:</strong> ${t.famous}</p>
-        <img src="${t.image}" alt="${temple}">
-      `;
-      found = true;
-      break;
-    }
-  }
-
-  if (!found) {
-    // If user types anything else, show default temple info (first temple)
-    const t = templeData["sarangapani"];
-    detailsDiv.innerHTML = `
-      <h2>${"SARANGAPANI"}</h2>
-      <p><strong>Story:</strong> ${t.story}</p>
-      <p><strong>Open:</strong> ${t.open} | <strong>Close:</strong> ${t.close}</p>
-      <p><strong>Why Famous:</strong> ${t.famous}</p>
-      <img src="${t.image}" alt="Sarangapani">
-    `;
-  }
+  window.location.href="templedetail.html?name="+encodeURIComponent(query);
 }
 </script>
 </body>
