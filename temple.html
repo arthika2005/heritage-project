@@ -17,7 +17,7 @@
 
 <h1>Search Kumbakonam Temples</h1>
 <input type="text" id="search" placeholder="Enter temple name">
-<button onclick="gotoTemple()">Enter</button>
+<button onclick="searchTemple()">Enter</button>
 <div id="templeDetails"></div>
 
 <script>
@@ -67,6 +67,7 @@ function searchTemple() {
 
  // If best score is decent (like > 0.3), show that temple
   if (bestMatch && bestScore > 0.3) {
+    window.location.href="`templedetail.html?temple=${bestMatch}`;
     const t = templeData[bestMatch];
     detailsDiv.innerHTML = `
       <h2>${bestMatch.toUpperCase()}</h2>
@@ -76,7 +77,7 @@ function searchTemple() {
       <img src="${t.image}" alt="${bestMatch}">
     `;
   } else {
-    detailsDiv.innerHTML = <p>No matching temple found.</p>;
+    detailsDiv.innerHTML = `<p>No matching temple found.</p>`;
   }
 }
 
