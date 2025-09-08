@@ -7,21 +7,21 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: f0e6ff;
       margin: 0;
       padding: 0;
+      background: url('temple.jpg') no-repeat center center fixed; 
+      background-size: cover;  /* image full screen ku adjust aagum */
+      color: black; /* text color black */
     }
-    .container{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:40px;
-    }
-    .text{
-      max-width:50%;
+    .overlay {
+      background-color: rgba(255, 255, 255, 0.7); /* light transparent box */
+      min-height: 100vh; /* full height cover */
+      display: flex;
+      align-items: center;
+      justify-content: center;
       text-align: center;
-      color:black;
-    }
+      padding: 40px;
+    }
     h1 {
       font-size: 48px; /* font size perusa */
       color: #333;
@@ -31,26 +31,22 @@
       font-size: 20px; /* paragraph um konjam perusa */
       color: #555;
     }
-    img {
-      margin-width: 40px;
-      border-radius: 20px; /* corner round */
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="text">
+  <div class="overlay">
+    <div >
   <h1>Welcome to Heritage Project</h1>
   <p>Explore the Temples of Kumbakonam and World Wonders</p>
-    </div>
 <img src="ind.jpg" alt="Kumbakonam Temples>
-  </div>
   <ul>
     <li><a href="/temple">Kumbakonam Temples</a></li>
     <li><a href="/wonder">World Wonders</a></li>
   </ul>
-</body>
 
+    </div>
+  </div>
+    </body>
 </html>
+
 
