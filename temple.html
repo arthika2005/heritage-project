@@ -1,88 +1,59 @@
-!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Kumbakonam Temples</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-        }
-        #search-section {
-            margin-bottom: 20px;
-        }
-        input[type="text"] {
-            padding: 8px;
-            width: 250px;
-        }
-        button {
-            padding: 8px 12px;
-            cursor: pointer;
-        }
-        img {
-            max-width: 400px;
-            display: block;
-            margin-top: 10px;
-        }
-        p {
-            margin: 5px 0;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kumbakonam Temples</title>
+  <style>
+    body { font-family: Arial; text-align: center; background-color: #f2f2f2; }
+    input, button { padding: 10px; margin: 5px; font-size: 16px; }
+    #templeDetails img { width: 400px; margin-top: 20px; }
+  </style>
 </head>
 <body>
 
-<h1>Kumbakonam Temples Search</h1>
+<h1>Search Kumbakonam Temples</h1>
+<input type="text" id="search" placeholder="Enter temple name">
+<button onclick="searchTemple()">Search</button>
 
-<div id="search-section">
-    <input type="text" id="search" placeholder="Enter temple name">
-    <button onclick="searchTemple()">Search</button>
-</div>
-
-<div id="result">
-    <img  id="image" src="suriya.jpg" alt="Temple Image">
-    <p id="story"></p>
-    <p id="timings"></p>
-    <p id="famous"></p>
-</div>
+<div id="templeDetails"></div>
 
 <script>
- const temples = {
-        "sarangapani": {
-            image: "suriya.jpg",
-            story: "Sarangapani Temple is an ancient Vishnu temple located in Kumbakonam.",
-            timings: "6:00 AM - 9:00 PM",
-            famous: "One of the Divya Desams, famous for its architecture."
-        },
-        "kumbeswarar": {
-            image: "suriya.jpg",
-            story: "Kumbeswarar Temple is a famous Shiva temple in Kumbakonam.",
-            timings: "5:30 AM - 8:30 PM",
-            famous: "Built by the Cholas, known for its huge gopuram."
-        },
-        "adikrishna": {
-            image: "suriya.jpg",
-            story: "Adi Kumbeswarar Temple is another famous temple in Kumbakonam.",
-            timings: "6:00 AM - 8:00 PM",
-            famous: "Famous for festivals and historic carvings."
-        }
-        // Add more temples as needed
-    };
+const templeData = {
+  "sarangapani": {
+    story: "Sarangapani Temple story...",
+    open: "6:00 AM",
+    close: "12:00 PM",
+    famous: "Dedicated to Lord Vishnu, one of the 108 Divya Desams.",
+    image: "suriya.jpg"
+  },
+  "airavatesvara": {
+    story: "Airavatesvara Temple story...",
+    open: "7:00 AM",
+    close: "12:30 PM",
+    famous: "Known for its Chola architecture and sculptures.",
+    image: "suriya.jpg"
+  }
+  // Add more temples here
+};
 
-    function searchTemple() {
-        const query = document.getElementById("search").value.toLowerCase();
-        const result = temples[query];
-        if(result){
-            document.getElementById("image").src = result.image;
-            document.getElementById("story").innerText = result.story;
-            document.getElementById("timings").innerText = "Timings: " + result.timings;
-            document.getElementById("famous").innerText = "Why Famous: " + result.famous;
-        } else {
-            alert("Temple not found. Check spelling!");
-            document.getElementById("image").src = "";
-            document.getElementById("story").innerText = "";
-            document.getElementById("timings").innerText = "";
-            document.getElementById("famous").innerText = "";
-        }
-    }
+function searchTemple() {
+  const query = document.getElementById('search').value.toLowerCase().trim();
+  const detailsDiv = document.getElementById('templeDetails');
+  
+  if (templeData[query]) {
+    const t = templeData[query];
+detailsDiv.innerHTML = `
+      <h2>${query.toUpperCase()}</h2>
+      <p><strong>Story:</strong> ${t.story}</p>
+      <p><strong>Open:</strong> ${t.open} | <strong>Close:</strong> ${t.close}</p>
+      <p><strong>Why Famous:</strong> ${t.famous}</p>
+      <img src="${t.image}" alt="${query}">
+    `;
+  } else {
+    detailsDiv.innerHTML = <p>Temple not found! Please try again.</p>;
+  }
+}
 </script>
 
 </body>
