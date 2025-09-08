@@ -43,11 +43,18 @@
   };
 
   function searchTemple() {
-    const input = document.getElementById("searchInput").value.trim();
-    if(temples[input]) {
+    const input = document.getElementById("searchInput").value.trim().toLowerCase();
+    let foundTemple=null;
+    for (let temple in temples) {
+      if(temple.toLowerCase().includes(input)) {
+        foundTemple=temple;
+        break;
+      }
+    }
+    if(foundTemple) {
       // Pass details using query string
-      const data = encodeURIComponent(JSON.stringify(temples[input]));
-window.location.href = templeDetails.html?data=${data}&name=${encodeURIComponent(input)};
+      const data = encodeURIComponent(JSON.stringify(temples[foundTemple]));
+window.location.href = `templeDetails.html?data=${data}&name=${encodeURIComponent(foundTemple)};
     } else {
       alert("Temple not found. Please check the spelling.");
     }
