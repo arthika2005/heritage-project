@@ -7,53 +7,71 @@
   <style>
     body {
       margin: 0;
-      padding: 0;
+      min-height:100vh;
       font-family: Arial, sans-serif;
       background-color: brown; /* light background color */
-    }
-    .container {
       display: flex;
+      flex-direction:column;
       align-items: center;       /* vertically center */
-      justify-content: space-between; /* text left, image right */
-      padding: 40px;
-      height: 100vh;             /* full screen height */
-      box-sizing: border-box;
+      justify-content: center; /
     }
-    .text {
-      width: 55%;
-      text-align: center;
-      color: black;
+    .img-container {
+      text-align:center;
+      margin-bottom:20px;
     }
-    h1 {
-      font-size: 48px;
-      margin-bottom: 20px;
-    }
-    p {
-      font-size: 20px;
-    }
-    img {
-      width: 35%;      /* image small size */
-      max-width: 300px; /* limit size */
-      border-radius: 20px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-    
+    .image-container img {
+    max-width: 80%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+
+  .button-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+  }
+
+  .button-container button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    transition: background-color 0.3s ease;
+  }
+
+  .button-container button:hover {
+    background-color: #0056b3;
+  }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="text">
   <h1>Welcome to Heritage Project</h1>
   <p>Explore the Temples of Kumbakonam and World Wonders</p>
+  <div class="image-container">
+    <img src="ind.jpg" alt="Kumbakonam Temples>
     </div>
-<img src="ind.jpg" alt="Kumbakonam Temples>
-  <ul>
-    <li><a href="/temple">Kumbakonam Temples</a></li>
-    <li><a href="/wonder">World Wonders</a></li>
-  </ul>
+      <div class="button-container">
+      <button onclick="showOption('Kumbakonam Temples')">Kumbakonam Temples</button>
+     <button onclick="showOption('World Wonders')">World Wonders</button>
   </div>
+  <script>
+    function showOption(option) {
+       if(option === 'Kumbakonam Temples') {
+         window.location.href='Kumbakonam Temples';
+       }
+      else if(option === 'World Wonders') {
+          window.location.href='World Wonders';
+      }
+    }
+  </script>
+</script>
     </body>
 </html>
+
 
 
 
