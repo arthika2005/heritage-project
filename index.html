@@ -6,36 +6,46 @@
   <title>Heritage Project</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      background: url('temple.jpg') no-repeat center center fixed; 
-      background-size: cover;  /* image full screen ku adjust aagum */
-      color: black; /* text color black */
+      font-family: Arial, sans-serif;
+      background-color: #f0e6ff; /* light background color */
     }
-    .overlay {
-      background-color: rgba(255, 255, 255, 0.6); /* light transparent box */
-      border-radius:20px;
-       padding: 40px;
-    }
+    .container {
+      display: flex;
+      align-items: center;       /* vertically center */
+      justify-content: space-between; /* text left, image right */
+      padding: 40px;
+      height: 100vh;             /* full screen height */
+      box-sizing: border-box;
+    }
+    .text {
+      width: 55%;
+      text-align: center;
+      color: black;
+    }
     h1 {
-      font-size: 48px; /* font size perusa */
-      margin-top: 20px;
+      font-size: 48px;
+      margin-bottom: 20px;
     }
     p {
-      font-size: 20px; /* paragraph um konjam perusa */
+      font-size: 20px;
     }
+    img {
+      width: 35%;      /* image small size */
+      max-width: 300px; /* limit size */
+      border-radius: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
     
   </style>
 </head>
 <body>
-  <div class="overlay">
+  <div class="container">
+    <div class="text">
   <h1>Welcome to Heritage Project</h1>
   <p>Explore the Temples of Kumbakonam and World Wonders</p>
+    </div>
 <img src="ind.jpg" alt="Kumbakonam Temples>
   <ul>
     <li><a href="/temple">Kumbakonam Temples</a></li>
@@ -44,6 +54,7 @@
   </div>
     </body>
 </html>
+
 
 
 
