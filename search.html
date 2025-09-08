@@ -1,0 +1,55 @@
+DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kumbakonam Temples Search</title>
+<style>
+  body { display:flex; flex-direction:column; align-items:center; justify-content:center; font-family:Arial; margin:0; min-height:100vh; background:#f8f8f8; }
+  input[type="text"] { padding:10px; width:300px; margin:20px 0; font-size:16px; }
+  button { padding:10px 20px; font-size:16px; cursor:pointer; border:none; border-radius:5px; background:#007bff; color:white; }
+  button:hover { background:#0056b3; }
+</style>
+</head>
+<body>
+
+<h2>Search for a Kumbakonam Temple</h2>
+<input type="text" id="searchInput" placeholder="Enter temple name">
+<button onclick="searchTemple()">Search</button>
+
+<script>
+  const temples = {
+    "Airavatesvara Temple": {
+      story: "Chola dynasty temple, famous for beautiful carvings.",
+      why: "Architectural marvel, UNESCO heritage",
+      open: "6:00 AM",
+      close: "8:00 PM"
+    },
+    "Sarangapani Temple": {
+      story: "Famous Vaishnavite temple with rich history.",
+      why: "Popular among devotees, ancient structure",
+      open: "5:30 AM",
+      close: "9:00 PM"
+    },
+    "Swamimalai Murugan Temple": {
+      story: "Temple on hill, famous for Murugan deity.",
+      why: "Pilgrimage spot, scenic location",
+      open: "6:00 AM",
+      close: "8:30 PM"
+    }
+  };
+
+  function searchTemple() {
+    const input = document.getElementById("searchInput").value.trim();
+    if(temples[input]) {
+      // Pass details using query string
+      const data = encodeURIComponent(JSON.stringify(temples[input]));
+window.location.href = templeDetails.html?data=${data}&name=${encodeURIComponent(input)};
+    } else {
+      alert("Temple not found. Please check the spelling.");
+    }
+  }
+</script>
+
+</body>
+</html>
