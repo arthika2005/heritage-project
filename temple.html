@@ -2,26 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Kumbakonam Temples</title>
+    <title>Temple Details</title>
 </head>
 <body>
-    <h1>Kumbakonam Temples Search</h1>
-    <input type="text" id="templeName" placeholder="Enter temple name">
-    <button onclick="searchTemple()">Search</button>
-    <button onclick="saveTemple()">Save Temple</button>
-
-    <div id="result"></div>
-    <h2>Saved Temples</h2>
-    <ul id="savedList"></ul>
+    <h1>Temple Details</h1>
+    <div id="result">Loading...</div>
 
     <script>
-        // Search Wikipedia
-        async function searchTemple() {
-            const name = document.getElementById('templeName').value;
-            if(!name) return alert('Enter temple name');
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
 
+        async function showTempleDetails(name) {
             try {
-                const url = https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(name + " Kumbakonam")};
+                const url =` https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(name + " Kumbakonam")}`;
                 const response = await fetch(url);
                 if(!response.ok) throw new Error('Not found');
                 const data = await response.json();
@@ -36,36 +31,9 @@
             }
         }
 
-        // Save temple to localStorage
-        function saveTemple() {
-            const name = document.getElementById('templeName').value;
-            if(!name) return alert('Enter temple name');
-
-            let temples = JSON.parse(localStorage.getItem('temples') || '[]');
-            if(!temples.includes(name)) temples.push(name);
-            localStorage.setItem('temples', JSON.stringify(temples));
- loadSavedTemples();
-        }
-
-        // Load saved temples
-        function loadSavedTemples() {
-            const temples = JSON.parse(localStorage.getItem('temples') || '[]');
-            const list = document.getElementById('savedList');
-            list.innerHTML = '';
-            temples.forEach(t => {
-                const li = document.createElement('li');
-                li.innerHTML = <a href="#" onclick="searchSavedTemple('${t}')">${t}</a>;
-                list.appendChild(li);
-            });
-        }
-
-        function searchSavedTemple(name) {
-            document.getElementById('templeName').value = name;
-            searchTemple();
-        }
-
-        // Load saved temples on page load
-        loadSavedTemples();
+        const templeName = getQueryParam('name');
+        if(templeName) showTempleDetails(templeName);
+        else document.getElementById('result').innerHTML = 'No temple name provided';
     </script>
 </body>
 </html>
