@@ -58,6 +58,7 @@
         fetch('temples.json')
         .then(res => res.json())
         .then(data => temples = data)
+                  console.log("Temple loaded",temples);
         .catch(err => console.error("Temples JSON load failed", err));
 
         // Find closest match (case-insensitive, partial match)
