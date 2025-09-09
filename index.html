@@ -59,18 +59,15 @@
      <button onclick="window.location.href='wonders.html'">World Wonders</button>
   </div>
   <script>
-    function showOption(option) {
-       if(option === 'Kumbakonam Temples') {
-         window.location.href='temple.html';
-       }
-      else if(option === 'World Wonders') {
-          window.location.href='Wonders.html';
-      }
-    }
+    function goNextPage(option) {
+    const githubLink = "https://arthika2005.github.io/heritage-project/temple.html";
+    window.location.href = ${githubLink}?option=${encodeURIComponent(option)};
+}
   </script>
 </script>
     </body>
 </html>
+
 
 
 
