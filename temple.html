@@ -1,39 +1,66 @@
-<!DOCTYPE html>
+
+           <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Temple Details</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kumbakonam Temples</title>
+  <style>
+    body { font-family: Arial; text-align: center; background-color: lightblue; }
+    input, button { padding: 10px; margin: 5px; font-size: 16px; }
+    #templeDetails img { width: 400px; margin-top: 20px; }
+    h1{
+      color:black;
+    }
+  </style>
 </head>
 <body>
-    <h1>Temple Details</h1>
-    <div id="result">Loading...</div>
 
+<h1>Search Kumbakonam Temples</h1>
+<input type="text" id="search" placeholder="Enter temple name">
+<button onclick="searchTemple()">Enter</button>
+<div id="templeDetails"></div>
     <script>
-        function getQueryParam(param) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(param);
-        }
+function similarity(a, b) {
+  a = a.toLowerCase();
+  b = b.toLowerCase();
+  let matches = 0;
+  for (let i = 0; i < Math.min(a.length, b.length); i++) {
+    if (a[i] === b[i]) matches++;
+  }
+  return matches / Math.max(a.length, b.length);
+}
 
-        async function showTempleDetails(name) {
-            try {
-                const url =` https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(name + " Kumbakonam")}`;
-                const response = await fetch(url);
-                if(!response.ok) throw new Error('Not found');
-                const data = await response.json();
+function searchTemple() {
+  const query = document.getElementById("search").value.toLowerCase().trim();
+  const detailsDiv = document.getElementById("templeDetails");
 
-                document.getElementById('result').innerHTML = `
-                    <h2>${data.title}</h2>
-                    <p>${data.extract}</p>
-                    <a href="${data.content_urls.desktop.page}" target="_blank">Read more on Wikipedia</a>
-                `;
-            } catch {
-                document.getElementById('result').innerHTML = 'Temple details not found on Wikipedia';
-            }
-        }
+  let bestMatch = null;
+  let bestScore = 0;
 
-        const templeName = getQueryParam('name');
-        if(templeName) showTempleDetails(templeName);
-        else document.getElementById('result').innerHTML = 'No temple name provided';
-    </script>
+  for (const temple in templeData) {
+    const score = similarity(query, temple);
+    if (score > bestScore) {
+      bestScore = score;
+      bestMatch = temple;
+    }
+  }
+
+ // If best score is decent (like > 0.3), show that temple
+  if (bestMatch && bestScore > 0.3) {
+    window.location.href=`templedetail.html?temple=${encodeURIComponent(bestMatch)}`;
+    const t = templeData[bestMatch];
+    detailsDiv.innerHTML = `
+      <h2>${bestMatch.toUpperCase()}</h2>
+      <p><strong>Story:</strong> ${t.story}</p>
+      <p><strong>Open:</strong> ${t.open} | <strong>Close:</strong> ${t.close}</p>
+      <p><strong>Why Famous:</strong> ${t.famous}</p>
+      <img src="${t.image}" alt="${bestMatch}">
+    `;
+  } else {
+    detailsDiv.innerHTML = `<p>No matching temple found.</p>`;
+  }
+}
+
 </body>
 </html>
