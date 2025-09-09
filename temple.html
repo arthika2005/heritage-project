@@ -1,9 +1,9 @@
 
-           <!DOCTYPE html>
+          !DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Temple Details</title>
+    <title>Kumbakonam Temple Details</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -18,6 +18,7 @@
             font-size: 16px;
             border-radius: 5px;
             border: none;
+            margin-right: 10px;
         }
         button {
             padding: 10px 20px;
@@ -34,22 +35,63 @@
         a {
             color: #ffcc00;
         }
+        #result {
+            margin-top: 30px;
+            text-align: left;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
     </style>
 </head>
 <body>
     <h1>Search Kumbakonam Temples</h1>
-    <input type="text" id="templeName" placeholder="Enter temple name">
+<input type="text" id="templeName" placeholder="Enter temple name">
     <button onclick="searchTemple()">Enter</button>
 
-    <div id="result" style="margin-top:20px;"></div>
+    <div id="result"></div>
 
     <script>
-        async function searchTemple() {
-            const name = document.getElementById('templeName').value;
-if(!name) return alert('Please enter a temple name');
+        let temples = [];
 
-            try {
-                const url =`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(name + " Kumbakonam")}`;
+        // Load temples.json
+        fetch('temples.json')
+        .then(res => res.json())
+        .then(data => temples = data)
+        .catch(err => console.error("Temples JSON load failed", err));
+
+        // Find closest match (case-insensitive, partial match)
+        function getClosestMatch(input) {
+            input = input.toLowerCase();
+            let closest = null;
+            let maxScore = 0;
+
+            temples.forEach(temp => {
+                const tempLower = temp.name.toLowerCase();
+                let score = 0;
+                input.split(' ').forEach(word => {
+                    if(tempLower.includes(word)) score++;
+                });
+                if(score > maxScore) {
+                    maxScore = score;
+                    closest = temp.name;
+                }
+            });
+
+            return closest;
+        }
+
+        async function searchTemple() {
+            let input = document.getElementById('templeName').value.trim();
+            if(!input) return alert('Please enter a temple name');
+
+            const closestTemple = getClosestMatch(input);
+            if(!closestTemple) {
+                document.getElementById('result').innerHTML = '<p>Temple not found</p>';
+                return;
+            }
+  try {
+                const url =` https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(closestTemple + " Kumbakonam")}`;
                 const response = await fetch(url);
                 if(!response.ok) throw new Error('Not found');
                 const data = await response.json();
@@ -60,20 +102,9 @@ if(!name) return alert('Please enter a temple name');
                     <a href="${data.content_urls.desktop.page}" target="_blank">Read more on Wikipedia</a>
                 `;
             } catch {
-                document.getElementById('result').innerHTML = 'Temple details not found on Wikipedia';
-            }
-        }f(!response.ok) throw new Error('Not found');
-                const data = await response.json();
-
-                document.getElementById('result').innerHTML = `
-                    <h2>${data.title}</h2>
-                    <p>${data.extract}</p>
-                    <a href="${data.content_urls.desktop.page}" target="_blank">Read more on Wikipedia</a>
-                `;
-            } catch {
                 document.getElementById('result').innerHTML = '<p>Temple details not found on Wikipedia</p>';
             }
-        }
+        }
     </script>
 </body>
 </html>
