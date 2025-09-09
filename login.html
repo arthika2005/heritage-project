@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    #form-container {
+      margin-top: 20px;
+    }
+    input {
+      padding: 5px;
+      margin: 5px;
+    }
+    button {
+      padding: 5px 10px;
+      margin: 5px;
+    }
+    #comment {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h2>Login Page</h2>
+
+  <button onclick="showLogin()">Sign In</button>
+  <button onclick="showSignup()">Sign Up</button>
+
+  <div id="form-container"></div>
+  <div id="comment"></div>
+
+  <script>
+    // Temporary storage for users
+    const users = {};
+
+    function showLogin() {
+      document.getElementById('form-container').innerHTML = `
+        <h3>Sign In</h3>
+        <input type="text" id="username" placeholder="Username"><br>
+        <input type="password" id="password" placeholder="Password"><br>
+        <button onclick="login()">Login</button>
+      `;
+      document.getElementById('comment').innerText = '';
+    }
+
+    function showSignup() {
+      document.getElementById('form-container').innerHTML = `
+        <h3>Sign Up</h3>
+        <input type="text" id="newusername" placeholder="New Username"><br>
+        <input type="password" id="newpassword" placeholder="New Password"><br>
+        <button onclick="signup()">Sign Up</button>
+      `;
+      document.getElementById('comment').innerText = '';
+    }
+
+    function login() {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      if(users[username] && users[username] === password) {
+        document.getElementById('comment').innerText = "Login successful!";
+      } else {
+        document.getElementById('comment').innerText = "Login not successful!";
+      }
+    }
+
+    function signup() {
+      const username = document.getElementById('newusername').value;
+      const password = document.getElementById('newpassword').value;
+
+      if(!username || !password) {
+        document.getElementById('comment').innerText = "Please enter username and password!";
+        return;
+      }
+
+      if(users[username]) {
+        document.getElementById('comment').innerText = "Username already exists!";
+      } else {
+        users[username] = password;
+        document.getElementById('comment').innerText = "Sign Up successful!";
+      }
+    }
+  </script>
+</body>
+</html>
+
+
+
