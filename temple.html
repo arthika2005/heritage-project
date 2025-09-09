@@ -62,7 +62,18 @@ if(!name) return alert('Please enter a temple name');
             } catch {
                 document.getElementById('result').innerHTML = 'Temple details not found on Wikipedia';
             }
-        }
+        }f(!response.ok) throw new Error('Not found');
+                const data = await response.json();
+
+                document.getElementById('result').innerHTML = `
+                    <h2>${data.title}</h2>
+                    <p>${data.extract}</p>
+                    <a href="${data.content_urls.desktop.page}" target="_blank">Read more on Wikipedia</a>
+                `;
+            } catch {
+                document.getElementById('result').innerHTML = '<p>Temple details not found on Wikipedia</p>';
+            }
+        }
     </script>
 </body>
 </html>
