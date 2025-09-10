@@ -21,11 +21,17 @@
       const query = document.getElementById("searchInput").value.trim().toLowerCase();
       if (query) {
         // Redirect to detail page
-        window.location.href = "templedetail.html?name=" + encodeURIComponent(query).toLowerCase());
+        window.location.href = "templedetail.html?name=" + encodeURIComponent(query);
       } else {
         alert("Please enter a temple name");
       }
     }
+            document.getElementById("search input").addEventListener("keydown",function(e)
+          {
+                    if (e.key === "Enter") {
+                              searchTemple();
+                    }
+          });
   </script>
 </body>
 </html>
