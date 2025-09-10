@@ -2,66 +2,30 @@
           <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Kumbakonam Temple Details</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #1a1a1a;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-        input {
-            padding: 10px;
-            width: 300px;
-            font-size: 16px;
-            border-radius: 5px;
-            border: none;
-            margin-right: 10px;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            border-radius: 5px;
-            border: none;
-            background-color: #ff6600;
-            color: white;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #ff9933;
-        }
-        a {
-            color: #ffcc00;
-        }
-        #result {
-            margin-top: 30px;
-            text-align: left;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Kumbakonam Temples</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; background: #fafafa; }
+    h2 { margin-top: 40px; }
+    input { padding: 10px; width: 250px; font-size: 16px; }
+    button { padding: 10px 20px; font-size: 16px; margin-left: 10px; cursor: pointer; }
+  </style>
 </head>
 <body>
-    <h1>Search Kumbakonam Temples</h1>
-<input type="text" id="templeName" placeholder="Enter temple name">
-    <button onclick="searchTemple()">Enter</button>
+  <h2>Search Kumbakonam Temples</h2>
+  <input type="text" id="searchInput" placeholder="Enter temple name (e.g., Sarangapani)">
+  <button onclick="searchTemple()">Search</button>
 
-    <div id="result"></div>
-
-    <script>
-        function searchTemple() {
+  <script>
+    function searchTemple() {
       const query = document.getElementById("searchInput").value.trim().toLowerCase();
-      if(query) {
-        // Go to detail page with query in URL
-        window.location.href = templeDetail.html?name=${encodeURIComponent(query)};
+      if (query) {
+        // Redirect to detail page
+        window.location.href = "templeDetail.html?name=" + encodeURIComponent(query);
       } else {
         alert("Please enter a temple name");
       }
-    }
-
-    </script>
+    }
+  </script>
 </body>
 </html>
