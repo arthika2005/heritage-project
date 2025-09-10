@@ -7,15 +7,25 @@
   <style>
     body { font-family: Arial; text-align: center; background-color: beige; }
     img { width: 400px; margin-top: 20px; }
+    .info{
+      margin-top:20px;
+      text-align:left;
+      max-width:600px;
+      margin-left:auto;
+      margin-right:auto;
+    }
+    h1{
+      color:#2e7d32;
+    }
   </style>
 </head>
 <body>
 
 <h1>Kumbakonam Temple Details</h1>
-<div id="templeDetails"></div>
+<div id="templeInfo"></div>
 
 <script>
-const templeData = {
+const temples = {
   "sarangapani": {
     story: "Sarangapani Temple story...",
     open: "6:00 AM",
@@ -32,39 +42,26 @@ const templeData = {
   }
 };
 
-// Get query param
-const urlParams = new URLSearchParams(window.location.search);
-const query = urlParams.get("name")?.toLowerCase() || "";
+ const params = new URLSearchParams(window.location.search);
+    const queryName = params.get("name");
 
-const detailsDiv = document.getElementById("templeDetails");
-let templeFound = null;
+    const temple = temples[queryName];
+    const container = document.getElementById("templeInfo");
 
-// Match temple
-for (const key in templeData) {
-  if (query.includes(key)) {
-    templeFound = templeData[key];
-    detailsDiv.innerHTML = `
-      <h2>${key.toUpperCase()}</h2>
-<p><strong>Story:</strong> ${templeFound.story}</p>
-      <p><strong>Open:</strong> ${templeFound.open} | <strong>Close:</strong> ${templeFound.close}</p>
-      <p><strong>Why Famous:</strong> ${templeFound.famous}</p>
-      <img src="${templeFound.image}" alt="${key}">
-    `;
-    break;
-  }
-}
-
-// Default temple if not matched
-if (!templeFound) {
-  const t = templeData["sarangapani"];
-  detailsDiv.innerHTML = `
-    <h2>SARANGAPANI</h2>
-    <p><strong>Story:</strong> ${t.story}</p>
-    <p><strong>Open:</strong> ${t.open} | <strong>Close:</strong> ${t.close}</p>
-    <p><strong>Why Famous:</strong> ${t.famous}</p>
-    <img src="${t.image}" alt="Sarangapani">
-  `;
-}
+    if(temple) {
+      container.innerHTML = `
+        <h3>${temple.name}</h3>
+        <img src="${temple.image}" alt="${temple.name}">
+        <div class="info">
+          <p><b>Why it's famous:</b> ${temple.famous}</p>
+          <p><b>Story:</b> ${temple.story}</p>
+          <p><b>Opening Time:</b> ${temple.opening}</p>
+          <p><b>Closing Time:</b> ${temple.closing}</p>
+        </div>
+      `;
+    } else {
+      container.innerHTML = <p style="color:red;">Temple not found. Please try again.</p>;
+    }
 </script>
 
 </body>
