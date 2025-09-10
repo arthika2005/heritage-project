@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Search Temples</title>
+  <style>
+    body { font-family: Arial; text-align: center; padding: 50px; background: #fafafa; }
+    h2 { margin-bottom: 30px; color: #2E7D32; }
+    input { padding: 12px; width: 250px; font-size: 16px; border-radius: 5px; border: 1px solid #ccc; }
+    button { padding: 12px 20px; margin-left: 10px; font-size: 16px; border-radius: 5px; border: none; background-color: #4CAF50; color: white; cursor: pointer; }
+    button:hover { background-color: #388E3C; }
+  </style>
+</head>
+<body>
+  <h2>Search Kumbakonam Temples</h2>
+  <form onsubmit="return false;">
+    <input type="text" id="searchInput" placeholder="Enter temple name (e.g., Sarangapani)">
+    <button type="button" onclick="searchTemple()">Search</button>
+  </form>
+
+  <script>
+    function searchTemple() {
+      const query = document.getElementById("searchInput").value.trim().toLowerCase();
+      if(query) {
+        window.location.href = "temple1.html?name=" + encodeURIComponent(query);
+      } else {
+        alert("Please enter a temple name");
+      }
+    }
+  </script>
+</body>
+</html>
