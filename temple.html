@@ -21,7 +21,7 @@
       const query = document.getElementById("searchInput").value.trim().toLowerCase();
       if (query) {
         // Redirect to detail page
-        window.location.href = "templedetail.html?name=" + encodeURIComponent(query);
+        window.location.href = "templedetail.html?name=" + encodeURIComponent(query).toLowerCase());
       } else {
         alert("Please enter a temple name");
       }
