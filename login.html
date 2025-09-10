@@ -2,94 +2,33 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login Page</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      margin-top: 50px;
-    }
-    #form-container {
-      margin-top: 20px;
-    }
-    input {
-      padding: 5px;
-      margin: 5px;
-    }
-    button {
-      padding: 5px 10px;
-      margin: 5px;
-    }
-    #comment {
-      margin-top: 20px;
-      font-weight: bold;
-    }
+    body { font-family: Arial; text-align: center; padding: 50px; background: #fafafa; }
+    input { padding: 12px; width: 250px; font-size: 16px; border-radius: 5px; border: 1px solid #ccc; margin: 10px 0; }
+    button { padding: 12px 20px; font-size: 16px; border-radius: 5px; border: none; background-color: #4CAF50; color: white; cursor: pointer; }
+    button:hover { background-color: #388E3C; }
   </style>
 </head>
 <body>
-  <h2>Login Page</h2>
-
-  <button onclick="showLogin()">Sign In</button>
-  <button onclick="showSignup()">Sign Up</button>
-
-  <div id="form-container"></div>
-  <div id="comment"></div>
+  <h2>Login</h2>
+  <form onsubmit="return false;">
+    <input type="text" id="username" placeholder="Enter username"><br>
+    <input type="password" id="password" placeholder="Enter password"><br>
+    <button type="button" onclick="login()">Login</button>
+  </form>
 
   <script>
-    // Temporary storage for users
-    const users = {};
-
-    function showLogin() {
-      document.getElementById('form-container').innerHTML = `
-        <h3>Sign In</h3>
-        <input type="text" id="username" placeholder="Username"><br>
-        <input type="password" id="password" placeholder="Password"><br>
-        <button onclick="login()">Login</button>
-      `;
-      document.getElementById('comment').innerText = '';
-    }
-
-    function showSignup() {
-      document.getElementById('form-container').innerHTML = `
-        <h3>Sign Up</h3>
-        <input type="text" id="newusername" placeholder="New Username"><br>
-        <input type="password" id="newpassword" placeholder="New Password"><br>
-        <button onclick="signup()">Sign Up</button>
-      `;
-      document.getElementById('comment').innerText = '';
-    }
-
     function login() {
-      const username = document.getElementById('username').value;
-      const password = document.getElementById('password').value;
-
-      if(users[username] && users[username] === password) {
-        document.getElementById('comment').innerText = "Login successful!";
+      // Any input accepted
+      const user = document.getElementById("username").value.trim();
+      const pass = document.getElementById("password").value.trim();
+      if(user && pass) {
+        window.location.href = "ind.html"; // redirect to main options page
       } else {
-        document.getElementById('comment').innerText = "Login not successful!";
-      }
-    }
-
-    function signup() {
-      const username = document.getElementById('newusername').value;
-      const password = document.getElementById('newpassword').value;
-
-      if(!username || !password) {
-        document.getElementById('comment').innerText = "Please enter username and password!";
-        return;
-      }
-
-      if(users[username]) {
-        document.getElementById('comment').innerText = "Username already exists!";
-      } else {
-        users[username] = password;
-        document.getElementById('comment').innerText = "Sign Up successful!";
+        alert("Please enter username and password");
       }
     }
   </script>
 </body>
 </html>
-
-
-
