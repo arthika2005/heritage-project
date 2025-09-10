@@ -2,56 +2,48 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Temple Details</title>
   <style>
-    body { font-family: Arial; text-align: center; background-color: beige; }
-    img { width: 400px; margin-top: 20px; }
-    .info{
-      margin-top:20px;
-      text-align:left;
-      max-width:600px;
-      margin-left:auto;
-      margin-right:auto;
-    }
-    h1{
-      color:#2e7d32;
-    }
+    body { font-family: Arial, sans-serif; background: #fff; text-align: center; padding: 30px; }
+    img { width: 400px; height: auto; border-radius: 10px; margin-top: 20px; }
+    .info { margin-top: 20px; text-align: left; max-width: 600px; margin-left: auto; margin-right: auto; }
+    h2 { color: #2E7D32; }
   </style>
 </head>
 <body>
+  <h2>Temple Details</h2>
+  <div id="templeInfo"></div>
 
-<h1>Kumbakonam Temple Details</h1>
-<div id="templeInfo"></div>
+  <script>
+    const temples = {
+      "sarangapani": {
+        name: "Sarangapani Temple",
+        image: "suriya.jpg",
+        famous: "One of the largest Vishnu temples in Kumbakonam.",
+        story: "The temple is dedicated to Lord Vishnu and is one of the Divya Desams.",
+        opening: "6:00 AM",
+        closing: "9:00 PM"
+      },
+      "adikesava perumal": {
+        name: "Adikesava Perumal Temple",
+        image: "suriya.jpg",
+        famous: "Known for its beautiful architecture and Vaishnavite traditions.",
+        story: "Dedicated to Lord Vishnu as Adikesava Perumal.",
+        opening: "6:30 AM",
+        closing: "8:30 PM"
+      }
+    };
 
-<script>
-const temples = {
-  "sarangapani": {
-    story: "Sarangapani Temple story...",
-    open: "6:00 AM",
-    close: "12:00 PM",
-    famous: "Dedicated to Lord Vishnu, one of the 108 Divya Desams.",
-    image: "suriya.jpg"
-  },
-  "airavatesvara": {
-    story: "Airavatesvara Temple story...",
-    open: "7:00 AM",
-    close: "12:30 PM",
-    famous: "Known for its Chola architecture and sculptures.",
-    image: "suriya.jpg"
-  }
-};
+    const params = new URLSearchParams(window.location.search);
+    const queryName = params.get("name");  
 
- const params = new URLSearchParams(window.location.search);
-    const queryName = params.get("name");
-
-    const temple = temples[queryName];
+    const temple = temples[queryName]; 
     const container = document.getElementById("templeInfo");
 
-    if(temple) {
+    if (temple) {
       container.innerHTML = `
         <h3>${temple.name}</h3>
-        <img src="${temple.image}" alt="${temple.name}">
+<img src="suriya.jpg" alt="${temple.name}">
         <div class="info">
           <p><b>Why it's famous:</b> ${temple.famous}</p>
           <p><b>Story:</b> ${temple.story}</p>
@@ -61,8 +53,7 @@ const temples = {
       `;
     } else {
       container.innerHTML = <p style="color:red;">Temple not found. Please try again.</p>;
-    }
-</script>
-
+    }
+  </script>
 </body>
 </html>
