@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Temple Details</title>
+  <style>
+    body { font-family: Arial; background: #fff; text-align: center; padding: 30px; }
+    h2 { color: #2E7D32; margin-bottom: 20px; }
+    img { width: 400px; height: auto; border-radius: 10px; margin-top: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+    .info { margin-top: 20px; text-align: left; max-width: 600px; margin: auto; background: #f0f0f0; padding: 15px 20px; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+    .info p { margin: 10px 0; font-size: 16px; }
+    button { margin-top: 20px; padding: 10px 20px; font-size: 16px; border-radius: 5px; border: none; background-color: #4CAF50; color: white; cursor: pointer; }
+    button:hover { background-color: #388E3C; }
+  </style>
+</head>
+<body>
+  <h2>Temple Details</h2>
+  <div id="info"></div>
+
+  <script>
+    const temples = {
+      "sarangapani": {
+        name: "Sarangapani Temple",
+        image: "suriya.jpg",
+        famous: "One of the largest Vishnu temples in Kumbakonam.",
+        story: "Dedicated to Lord Vishnu and is one of the Divya Desams. The temple's rajagopuram is among the tallest in South India.",
+        opening: "6:00 AM",
+        closing: "9:00 PM"
+      },
+      "adikesava perumal": {
+        name: "Adikesava Perumal Temple",
+        image: "suriya.jpg",
+        famous: "Known for its beautiful architecture and Vaishnavite traditions.",
+        story: "Dedicated to Lord Vishnu as Adikesava Perumal. Revered for heritage and spiritual importance.",
+        opening: "6:30 AM",
+        closing: "8:30 PM"
+      }
+    };
+
+    const params = new URLSearchParams(window.location.search);
+const queryName = params.get("name")?.toLowerCase();
+
+    const temple = temples[queryName];
+    const container = document.getElementById("info");
+
+    if(temple) {
+      container.innerHTML = `
+        <h3>${temple.name}</h3>
+        <img src="${temple.image}" alt="${temple.name}">
+        <div class="info">
+          <p><b>Why it's famous:</b> ${temple.famous}</p>
+          <p><b>Story:</b> ${temple.story}</p>
+          <p><b>Opening Time:</b> ${temple.opening}</p>
+          <p><b>Closing Time:</b> ${temple.closing}</p>
+        </div>
+        <button onclick="window.history.back()">Back to Search</button>
+      `;
+    } else {
+      container.innerHTML = '<p style="color:red;">Temple not found. Please try again.</p>';
+    }
+  </script>
+</body>
+</html>
