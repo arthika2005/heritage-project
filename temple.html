@@ -14,14 +14,14 @@
 <body>
   <h2>Search Kumbakonam Temples</h2>
   <input type="text" id="searchInput" placeholder="Enter temple name (e.g., Sarangapani)">
-  <button onclick="searchTemple()">Search</button>
+  <button onclick="searchTemple()">Enter</button>
 
   <script>
     function searchTemple() {
       const query = document.getElementById("searchInput").value.trim().toLowerCase();
       if (query) {
         // Redirect to detail page
-        window.location.href = "templeDetail.html?name=" + encodeURIComponent(query);
+        window.location.href = "templedetail.html?name=" + encodeURIComponent(query);
       } else {
         alert("Please enter a temple name");
       }
